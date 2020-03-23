@@ -1,1 +1,7 @@
-<p>property-list works!</p>
+<div class="row">
+  <div *ngFor="let property of properties" class="col-sm-4">
+    <div class="shadow-lg p-3 mb-4">
+        <app-property-card [property]="property"></app-property-card>
+    </div>
+</div>
+</div>
