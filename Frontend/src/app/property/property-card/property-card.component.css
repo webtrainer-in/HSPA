@@ -1,4 +1,18 @@
-.propImg{
-  height: 250px;
+.img-wrapper{
   overflow: hidden;
+}
+
+.card:hover img{
+  transform: scale(1.2,1.2);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  height: 250px;
+  opacity: .7;
+}
+
+.card img{
+  transform: scale(1,1);
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+  height: 250px
 }
