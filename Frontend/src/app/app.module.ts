@@ -12,6 +12,7 @@ import { AddPropertyComponent } from './property/add-property/add-property.compo
 
 const appRoutes: Routes = [
   {path: '', component: PropertyListComponent},
+  {path: 'rent-property', component: PropertyListComponent},
   {path: 'add-property', component: AddPropertyComponent}
 ];
 
