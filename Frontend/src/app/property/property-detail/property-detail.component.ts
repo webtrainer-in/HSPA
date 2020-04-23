@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-property-detail',
