@@ -5,36 +5,38 @@
       Register
     </div>
     <div class="card-body">
-      <form>
+      <form [formGroup]="registerationForm" (ngSubmit)="onSubmit()">
         <div class="form-group col-12">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" formControlName="userName">
         </div>
 
         <div class="form-group col-12">
           <label for="email" class="form-label">Email</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="email">
         </div>
 
         <div class="form-group col-12">
           <label for="passwrod" class="form-label">Password</label>
-          <input type="text" class="form-control">
+          <input type="password" class="form-control" formControlName="password">
         </div>
 
         <div class="form-group col-12">
           <label for="cpassword" class="form-label">Confirm Password</label>
-          <input type="text" class="form-control">
+          <input type="password" class="form-control" formControlName="confirmPassword">
         </div>
 
         <div class="form-group col-12">
           <label for="mobile" class="form-label">Mobile</label>
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" formControlName="mobile">
         </div>
 
         <div class="form-group col-12">
           <button type="submit" class="btn btn-primary">Save</button>
           <button type="reset" class="btn btn-secondary ml-2">Cancel</button>
         </div>
+        Form Values: {{registerationForm.value | json}} <br/>
+        Form Status: {{registerationForm.valid}}
       </form>
     </div>
   </div>
