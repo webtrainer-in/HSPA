@@ -8,22 +8,52 @@
       <form [formGroup]="registerationForm" (ngSubmit)="onSubmit()">
         <div class="form-group col-12">
             <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" formControlName="userName">
+            <input type="text" class="form-control"
+            formControlName="userName"
+            >
+            <span *ngIf="!userName.valid && userName.touched"
+            class="error-block">
+              Please provide name
+            </span>
         </div>
 
         <div class="form-group col-12">
           <label for="email" class="form-label">Email</label>
           <input type="text" class="form-control" formControlName="email">
+          <span *ngIf="!email.valid && email.touched" class="error-block">
+            <span *ngIf="email.hasError('required')">
+                Please provide email id
+            </span>
+            <span *ngIf="email.hasError('email')">
+              Please provide valid email id
+            </span>
+          </span>
         </div>
 
         <div class="form-group col-12">
           <label for="passwrod" class="form-label">Password</label>
           <input type="password" class="form-control" formControlName="password">
+          <span *ngIf="!password.valid && password.touched" class="error-block">
+            <span *ngIf="password.errors['required']">
+              Please provide password
+            </span>
+            <span *ngIf="password.errors.minlength">
+              Password should not be lesser than 8 character
+            </span>
+          </span>
         </div>
 
         <div class="form-group col-12">
           <label for="cpassword" class="form-label">Confirm Password</label>
           <input type="password" class="form-control" formControlName="confirmPassword">
+          <span  *ngIf="!confirmPassword.valid && confirmPassword.touched">
+            <span *ngIf="confirmPassword.hasError('required')">
+              Please confirm password
+            </span>
+          </span>
+            <span *ngIf="registerationForm.hasError('notmatched') && confirmPassword.valid">
+              Password not matched
+            </span>
         </div>
 
         <div class="form-group col-12">
