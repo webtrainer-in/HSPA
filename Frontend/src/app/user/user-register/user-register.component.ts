@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { UserServiceService } from 'src/app/services/user-service.service';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-user-register',
@@ -9,7 +11,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class UserRegisterComponent implements OnInit {
 
   registerationForm: FormGroup;
-  constructor(private fb: FormBuilder) { }
+  user: User;
+  userSubmitted: boolean;
+  constructor(private fb: FormBuilder, private userService: UserServiceService) { }
 
   ngOnInit() {
     // this.registerationForm = new FormGroup({
@@ -20,6 +24,7 @@ export class UserRegisterComponent implements OnInit {
     //   mobile: new FormControl(null, [Validators.required, Validators.maxLength(10)])
     // }, this.passwordMatchingValidatior);
     this.createRegisterationForm();
+    // this.registerationForm.controls['userName'].setValue('Default Value');
   }
 
   createRegisterationForm() {
@@ -37,7 +42,29 @@ export class UserRegisterComponent implements OnInit {
     {notmatched: true};
   }
 
-  // ------------------------------------
+
+  onSubmit() {
+    console.log(this.registerationForm.value);
+    this.userSubmitted = true;
+
+    if (this.registerationForm.valid) {
+      // this.user = Object.assign(this.user, this.registerationForm.value);
+      this.userService.addUser(this.userData());
+      this.registerationForm.reset();
+      this.userSubmitted = false;
+  }
+  }
+
+  userData(): User {
+    return this.user = {
+      userName: this.userName.value,
+      email: this.email.value,
+      password: this.password.value,
+      mobile: this.mobile.value
+    }
+  }
+
+    // ------------------------------------
   // Getter methods for all form controls
   // ------------------------------------
   get userName() {
@@ -57,8 +84,4 @@ export class UserRegisterComponent implements OnInit {
     return this.registerationForm.get('mobile') as FormControl;
   }
   // ------------------------
-
-  onSubmit() {
-    console.log(this.registerationForm);
-  }
 }
