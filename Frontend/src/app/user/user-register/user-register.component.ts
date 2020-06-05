@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { UserServiceService } from 'src/app/services/user-service.service';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
 
@@ -15,7 +15,7 @@ export class UserRegisterComponent implements OnInit {
   user: User;
   userSubmitted: boolean;
   constructor(private fb: FormBuilder,
-              private userService: UserServiceService,
+              private userService: UserService,
               private alertify: AlertifyService ) { }
 
   ngOnInit() {

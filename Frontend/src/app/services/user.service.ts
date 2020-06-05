@@ -4,7 +4,7 @@ import { User } from '../model/user';
 @Injectable({
   providedIn: 'root'
 })
-export class UserServiceService {
+export class UserService {
 
 constructor() { }
 

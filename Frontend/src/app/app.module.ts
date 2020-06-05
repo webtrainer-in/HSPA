@@ -13,7 +13,7 @@ import { AddPropertyComponent } from './property/add-property/add-property.compo
 import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { UserLoginComponent } from './user/user-login/user-login.component';
-import { UserServiceService } from './services/user-service.service';
+import { UserService } from './services/user.service';
 import { AlertifyService } from './services/alertify.service';
 
 const appRoutes: Routes = [
@@ -46,7 +46,7 @@ const appRoutes: Routes = [
    ],
    providers: [
      HousingService,
-     UserServiceService,
+     UserService,
      AlertifyService
    ],
    bootstrap: [
