@@ -1,13 +1,13 @@
 <div class="row mb-5">
-  <div class="col-8">
+  <div class="col-8 shadow-lg p-0 bg-white">
     <div class="card">
       <div class="card-header">
         <h3>List your Property</h3>
       </div>
       <div class="card-body">
         <form (ngSubmit)='onSubmit()' #Form="ngForm">
-          <div>
-            <tabset #formTabs>
+          <div class="tab-panel">
+            <tabset class="member-tabset" #formTabs>
               <tab heading="Basic Info">
                   <div class="form-group col-12">
                   <p>I want to</p>
@@ -232,9 +232,9 @@
   <div class="col-4">
     <div class="card-header">
       <h3>Your Property Preview</h3>
-      <div>
-        <app-property-card [property]="propertyView"></app-property-card>
-      </div>
+    </div>
+    <div class="shadow-lg p-3 bg-white">
+      <app-property-card [property]="propertyView" [hideIcons]="true"></app-property-card>
     </div>
   </div>
 </div>
