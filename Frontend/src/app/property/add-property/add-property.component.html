@@ -21,7 +21,8 @@
 
                   <div class="form-group col-12">
                     <p>BHK</p>
-                      <div class="btn-group" btnRadioGroup>
+                      <div class="btn-group" btnRadioGroup
+                      [(ngModel)]="propertyView.BHK" name="BHK">
                         <label
                         *ngFor="let bhk of [1,2,3,4]"
                         class="btn btn-outline-primary mr-2"
@@ -33,7 +34,7 @@
                     <div class="form-group col-12">
                       <p>Property Type</p>
                         <div class="btn-group" btnRadioGroup name='propType'
-                        [(ngModel)]="propertyView.Type">
+                        [(ngModel)]="propertyView.PType">
                           <label
                           *ngFor="let ptype of propertyTypes"
                           class="btn btn-outline-primary mr-2"
@@ -45,7 +46,8 @@
 
                       <div class="form-group col-12">
                         <p>Furnishing Type</p>
-                          <div class="btn-group" btnRadioGroup>
+                          <div class="btn-group" btnRadioGroup
+                          [(ngModel)]="propertyView.FType" name="FType">
                             <label
                             *ngFor="let ftype of furnishTypes"
                             class="btn btn-outline-primary mr-2"
@@ -70,7 +72,10 @@
 
                   <div class="form-group col-12">
                     <label>City</label>
-                    <input type="text" class="form-control">
+                    <input type="text"
+                    class="form-control"
+                    [(ngModel)]="propertyView.City"
+                    name="City">
                   </div>
 
                   <div class="form-group col-12">
@@ -98,7 +103,9 @@
 
                   <div class="form-group col-12">
                     <label>Built Area (in Sqr Feet)</label>
-                    <input type="text" class="form-control">
+                    <input type="text"
+                    class="form-control"
+                    [(ngModel)]="propertyView.BuiltArea" name="BuiltArea">
                   </div>
 
                   <div class="form-group col-12">
