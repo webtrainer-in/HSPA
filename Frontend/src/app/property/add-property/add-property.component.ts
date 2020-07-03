@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 import { IPropertyBase } from 'src/app/model/ipropertybase';
 
@@ -11,9 +11,10 @@ import { IPropertyBase } from 'src/app/model/ipropertybase';
   styleUrls: ['./add-property.component.css']
 })
 export class AddPropertyComponent implements OnInit {
-  //@ViewChild('Form') addPropertyForm: NgForm;
+  // @ViewChild('Form') addPropertyForm: NgForm;
   @ViewChild('formTabs') formTabs: TabsetComponent;
   addPropertyForm: FormGroup;
+  nextClicked: boolean;
 
   // Will come from masters
   propertyTypes: Array<string> = ['House', 'Apartment', 'Duplex']
@@ -53,6 +54,21 @@ export class AddPropertyComponent implements OnInit {
     });
   }
 
+  // -------------------
+  // Getter Methods
+  // -------------------
+  get BasicInfo() {
+    return this.addPropertyForm.controls.BasicInfo as FormGroup;
+  }
+
+  get PriceInfo() {
+    return this.addPropertyForm.controls.PriceInfo as FormGroup;
+  }
+
+  get SellRent() {
+    return this.BasicInfo.controls.SellRent as FormControl;
+  }
+
   onBack() {
     this.router.navigate(['/']);
   }
@@ -63,8 +79,11 @@ export class AddPropertyComponent implements OnInit {
     console.log(this.addPropertyForm);
   }
 
-  selectTab(tabId: number) {
-    this.formTabs.tabs[tabId].active = true;
+  selectTab(NextTabId: number, IsCurrentTabValid: boolean) {
+    this.nextClicked = true;
+    if (IsCurrentTabValid) {
+      this.formTabs.tabs[NextTabId].active = true;
+    }
   }
 
 }
