@@ -97,6 +97,9 @@
                     <input type="text" class="form-control"
                     formControlName="Price"
                     [(ngModel)]="propertyView.Price">
+                    <div class="error-block" *ngIf="Price.invalid && (nextClicked || Price.touched)">
+                      Please select sell or rent
+                    </div>
                   </div>
 
                   <div class="form-group col-12">

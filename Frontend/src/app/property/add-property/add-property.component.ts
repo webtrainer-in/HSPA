@@ -69,11 +69,25 @@ export class AddPropertyComponent implements OnInit {
     return this.BasicInfo.controls.SellRent as FormControl;
   }
 
+  get Price() {
+    return this.PriceInfo.controls.Price as FormControl;
+  }
+
   onBack() {
     this.router.navigate(['/']);
   }
 
   onSubmit() {
+    this.nextClicked = true;
+    if (this.BasicInfo.invalid) {
+      this.formTabs.tabs[0].active = true;
+      return;
+    }
+
+    if (this.PriceInfo.invalid) {
+      this.formTabs.tabs[1].active = true;
+      return;
+    }
     console.log('Congrats, form Submitted');
     console.log('SellRent=' + this.addPropertyForm.value.BasicInfo.SellRent);
     console.log(this.addPropertyForm);
