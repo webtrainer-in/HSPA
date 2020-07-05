@@ -67,7 +67,7 @@ export class AddPropertyComponent implements OnInit {
 
       OtherInfo: this.fb.group({
         RTM: [null, Validators.required],
-        PosessionOn: [null],
+        PossessionOn: [null],
         AOP: [null],
         Gated: [null],
         MainEntrance: [null],
@@ -160,8 +160,8 @@ export class AddPropertyComponent implements OnInit {
         return this.OtherInfo.controls.RTM as FormControl;
       }
 
-      get PossesioOn() {
-        return this.OtherInfo.controls.PosessionOn as FormControl;
+      get PossessionOn() {
+        return this.OtherInfo.controls.PossessionOn as FormControl;
       }
 
       get AOP() {
@@ -172,7 +172,7 @@ export class AddPropertyComponent implements OnInit {
         return this.OtherInfo.controls.Gated as FormControl;
       }
 
-      get MainEntrace() {
+      get MainEntrance() {
         return this.OtherInfo.controls.MainEntrance as FormControl;
       }
 
