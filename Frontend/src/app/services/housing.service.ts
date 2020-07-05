@@ -5,6 +5,7 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 import { Observable } from 'rxjs';
 import { IProperty } from '../model/iproperty';
 import { IPropertyBase } from '../model/ipropertybase';
+import { Property } from '../model/property';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,8 @@ export class HousingService {
     );
 
     return this.http.get<IProperty[]>('data/properties.json');
+  }
+  addProperty(property: Property) {
+    localStorage.setItem('newProp', JSON.stringify(property));
   }
 }
