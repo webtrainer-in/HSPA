@@ -5,6 +5,7 @@ import { TabsetComponent } from 'ngx-bootstrap/tabs/public_api';
 import { IPropertyBase } from 'src/app/model/ipropertybase';
 import { Property } from 'src/app/model/property';
 import { HousingService } from 'src/app/services/housing.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 
 @Component({
@@ -39,7 +40,8 @@ export class AddPropertyComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private housingService: HousingService) { }
+    private housingService: HousingService,
+    private alertify: AlertifyService) { }
 
   ngOnInit() {
     this.CreateAddPropertyForm();
@@ -198,10 +200,18 @@ export class AddPropertyComponent implements OnInit {
     if (this.allTabsValid()) {
       this.mapProperty();
       this.housingService.addProperty(this.property);
-      console.log('Congrats, your property listed succeffully on our website');
+      this.alertify.success('Congrats, your property listed successfully on our website');
       console.log(this.addPropertyForm);
+
+      if(this.SellRent.value === '2') {
+        this.router.navigate(['/rent-property']);
+      } else {
+        this.router.navigate(['/']);
+      }
+
+
     } else {
-      console.log('Please review the form and provide all valid entries');
+      this.alertify.error('Please review the form and provide all valid entries');
     }
   }
 
@@ -227,7 +237,6 @@ export class AddPropertyComponent implements OnInit {
     this.property.MainEntrance = this.MainEntrance.value;
     this.property.Possession = this.PossessionOn.value;
     this.property.Description = this.Description.value;
-    this.property.Image = 'propNA';
     this.property.PostedOn = new Date().toString();
   }
 
