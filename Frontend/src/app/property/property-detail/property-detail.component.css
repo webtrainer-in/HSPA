@@ -1,0 +1,11 @@
+.card {
+  min-height: 600px;
+}
+
+.card img {
+  padding: 10px;
+}
+
+.card-img-wrapper {
+  height: 250px;
+}
