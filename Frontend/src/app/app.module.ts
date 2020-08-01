@@ -8,6 +8,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {PropertyDetailResolverService} from './property/property-detail/property-detail-resolver.service';
 
 import { AppComponent } from './app.component';
 import { PropertyCardComponent } from './property/property-card/property-card.component';
@@ -26,7 +27,9 @@ const appRoutes: Routes = [
   {path: '', component: PropertyListComponent},
   {path: 'rent-property', component: PropertyListComponent},
   {path: 'add-property', component: AddPropertyComponent},
-  {path: 'property-detail/:id', component: PropertyDetailComponent},
+  {path: 'property-detail/:id',
+          component: PropertyDetailComponent,
+          resolve: {prp: PropertyDetailResolverService}},
   {path: 'user/login', component: UserLoginComponent},
   {path: 'user/register', component: UserRegisterComponent},
   {path: '**', component: PropertyListComponent}
@@ -59,7 +62,8 @@ const appRoutes: Routes = [
      HousingService,
      UserService,
      AlertifyService,
-     AuthService
+     AuthService,
+     PropertyDetailResolverService
    ],
    bootstrap: [
       AppComponent
