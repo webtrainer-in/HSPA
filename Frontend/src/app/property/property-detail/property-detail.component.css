@@ -10,3 +10,9 @@
 .card-img-wrapper {
   height: 250px;
 }
+
+.ngx-gallery
+{
+  display: inline-block;
+  margin-bottom: 20px;
+}

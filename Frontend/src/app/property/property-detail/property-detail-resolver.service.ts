@@ -4,7 +4,6 @@ import { Property } from 'src/app/model/property';
 import { Observable, of } from 'rxjs';
 import { HousingService } from 'src/app/services/housing.service';
 import { catchError, map } from 'rxjs/operators';
-import { Route } from '@angular/compiler/src/core';
 
 @Injectable({
   providedIn: 'root'
