@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "hspa-angular": {
+      "hosting": {
+        "hspa": [
+          "hspa-angular"
+        ]
+      }
+    }
+  }
+}
