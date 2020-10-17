@@ -15,7 +15,7 @@ namespace WebAPI.Data.Repo
         }
         public void AddCity(City city)
         {
-            dc.Cities.AddAsync(city);
+            dc.Cities.Add(city);
         }
 
         public void DeleteCity(int CityId)
