@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
             return StatusCode(200);
         }
 
-        [HttpPut("updateCountry/{id}")]
+        [HttpPut("updateCityName/{id}")]
         public async Task<IActionResult> UpdateCity(int id, CityUpdateDto cityDto)
         {
             var cityFromDb = await uow.CityRepository.FindCity(id);
