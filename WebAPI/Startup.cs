@@ -12,6 +12,7 @@ using WebAPI.Data;
 using WebAPI.Extensions;
 using WebAPI.Helpers;
 using WebAPI.Interfaces;
+using WebAPI.Middlewares;
 
 namespace WebAPI
 {
@@ -39,7 +40,9 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.ConfigureExceptionHandler(env);
+            app.ConfigureExceptionHandler(env);   
+
+            // app.ConfigureBuiltinExceptionHandler;         
             
             app.UseRouting();
 
