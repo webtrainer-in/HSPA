@@ -7,6 +7,7 @@ namespace WebAPI.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
         [Required]
         public string Country { get; set; }
 
