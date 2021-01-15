@@ -38,16 +38,19 @@ namespace WebAPI
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            var secretKey = Configuration.GetSection("AppSettings:Key").Value;
             var key = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes("shhh.. this is my top secret"));
+                .GetBytes(secretKey));
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            // services.AddAuthentication("Bearer")
                 .AddJwtBearer(opt => {
                     opt.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
                         ValidateIssuer = false,
                         ValidateAudience = false,
-                        IssuerSigningKey = key
+                        IssuerSigningKey = key                        
                     };
                 });
         }
@@ -55,7 +58,7 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.ConfigureExceptionHandler(env);   
+            app.ConfigureExceptionHandler(env);            
 
             // app.ConfigureBuiltinExceptionHandler;         
             
