@@ -70,6 +70,8 @@ namespace WebAPI
             // app.ConfigureBuiltinExceptionHandler;         
             
             app.UseRouting();
+            app.UseHsts();
+            app.UseHttpsRedirection();
 
             app.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 

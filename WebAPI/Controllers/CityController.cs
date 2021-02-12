@@ -25,9 +25,8 @@ namespace WebAPI.Controllers
         }
 
         // GET api/city
-        [HttpGet]
-        
-        // [AllowAnonymous]
+        [HttpGet ("cities")]        
+        [AllowAnonymous]
         public async Task<IActionResult> GetCities()
         {            
             var cities = await uow.CityRepository.GetCitiesAsync();
