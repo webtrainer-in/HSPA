@@ -5,3 +5,5 @@ Frontend/src/assets/images/internal-4.jpg
 Frontend/src/assets/images/internal-5.jpg
 bin
 obj
+wwwroot
+*.cache
