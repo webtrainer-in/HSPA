@@ -37,6 +37,14 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "npm",
+            "script": "lint",
+            "path": "Frontend/",
+            "problemMatcher": "$eslint-stylish",
+            "label": "npm: lint - Frontend",
+            "detail": "eslint -c .eslintrc.js --ext .ts ./src"
         }
     ]
 }
