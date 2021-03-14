@@ -27,52 +27,52 @@ import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
 
 const appRoutes: Routes = [
-  {path: '', component: PropertyListComponent},
-  {path: 'rent-property', component: PropertyListComponent},
-  {path: 'add-property', component: AddPropertyComponent},
-  {path: 'property-detail/:id',
-          component: PropertyDetailComponent,
-          resolve: {prp: PropertyDetailResolverService}},
-  {path: 'user/login', component: UserLoginComponent},
-  {path: 'user/register', component: UserRegisterComponent},
-  {path: '**', component: PropertyListComponent}
-]
+    {path: '', component: PropertyListComponent},
+    {path: 'rent-property', component: PropertyListComponent},
+    {path: 'add-property', component: AddPropertyComponent},
+    {path: 'property-detail/:id',
+        component: PropertyDetailComponent,
+        resolve: {prp: PropertyDetailResolverService}},
+    {path: 'user/login', component: UserLoginComponent},
+    {path: 'user/register', component: UserRegisterComponent},
+    {path: '**', component: PropertyListComponent}
+];
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      PropertyCardComponent,
-      PropertyListComponent,
-      NavBarComponent,
-      AddPropertyComponent,
-      PropertyDetailComponent,
-      UserRegisterComponent,
-      UserLoginComponent,
-      FilterPipe,
-      SortPipe
-   ],
-   imports: [
-      BrowserModule,
-      HttpClientModule,
-      FormsModule,
-      ReactiveFormsModule,
-      RouterModule.forRoot(appRoutes),
-      BrowserAnimationsModule,
-      BsDropdownModule.forRoot(),
-      TabsModule.forRoot(),
-      ButtonsModule.forRoot(),
-      BsDatepickerModule.forRoot(),
-      NgxGalleryModule
-   ],
-   providers: [
-     HousingService,
-     UserService,
-     AlertifyService,
-     AuthService,
-     PropertyDetailResolverService
-   ],
-   bootstrap: [
-      AppComponent
-   ]
+    declarations: [
+        AppComponent,
+        PropertyCardComponent,
+        PropertyListComponent,
+        NavBarComponent,
+        AddPropertyComponent,
+        PropertyDetailComponent,
+        UserRegisterComponent,
+        UserLoginComponent,
+        FilterPipe,
+        SortPipe
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule,
+        BsDropdownModule.forRoot(),
+        TabsModule.forRoot(),
+        ButtonsModule.forRoot(),
+        BsDatepickerModule.forRoot(),
+        NgxGalleryModule
+    ],
+    providers: [
+        HousingService,
+        UserService,
+        AlertifyService,
+        AuthService,
+        PropertyDetailResolverService
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule { }
