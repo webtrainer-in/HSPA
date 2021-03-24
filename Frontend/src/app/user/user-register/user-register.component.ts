@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { UserService } from 'src/app/services/user.service';
-import { User } from 'src/app/model/user';
+import { UserForRegister } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-user-register',
@@ -12,10 +12,10 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 export class UserRegisterComponent implements OnInit {
 
     registerationForm: FormGroup;
-    user: User;
+    user: UserForRegister;
     userSubmitted: boolean;
     constructor(private fb: FormBuilder,
-                private userService: UserService,
+                private authService: AuthService,
                 private alertify: AlertifyService ) { }
 
     ngOnInit() {
@@ -52,11 +52,14 @@ export class UserRegisterComponent implements OnInit {
 
         if (this.registerationForm.valid) {
             // this.user = Object.assign(this.user, this.registerationForm.value);
-            this.userService.addUser(this.userData());
-            this.onReset();
-            this.alertify.success('Congrats, you are successfully registered');
-        } else {
-            this.alertify.error('Kindly provide the required fields');
+            this.authService.registerUser(this.userData()).subscribe(() =>
+            {
+                this.onReset();
+                this.alertify.success('Congrats, you are successfully registered');
+            },error => {
+                console.log(error);
+                this.alertify.error(error.error);
+            });
         }
     }
 
@@ -66,7 +69,7 @@ export class UserRegisterComponent implements OnInit {
     }
 
 
-    userData(): User {
+    userData(): UserForRegister {
         return this.user = {
             userName: this.userName.value,
             email: this.email.value,

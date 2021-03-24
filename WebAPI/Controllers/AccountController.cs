@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Dtos;
+using WebAPI.Extensions;
 using WebAPI.Interfaces;
 using WebAPI.Models;
 
@@ -30,7 +31,7 @@ namespace WebAPI.Controllers
 
             if (user == null)
             {
-                return Unauthorized();
+                return Unauthorized("Invalid user name or password");
             }
 
             var loginRes = new LoginResDto();
@@ -42,6 +43,9 @@ namespace WebAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(LoginReqDto loginReq)
         {
+            if(loginReq.UserName.IsEmpty() || loginReq.Password.IsEmpty())
+                return BadRequest("User name or password can not be blank");
+
             if (await uow.UserRepository.UserAlreadyExists(loginReq.UserName))
                 return BadRequest("User already exists, please try something else");
 

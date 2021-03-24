@@ -7,3 +7,4 @@ bin
 obj
 wwwroot
 *.cache
+node_modules
