@@ -51,8 +51,7 @@ namespace WebAPI.Controllers
         {
             ApiError apiError = new ApiError();
 
-            if(string.IsNullOrEmpty(loginReq.UserName.Trim()) || 
-                string.IsNullOrEmpty(loginReq.Password.Trim())) {
+            if(loginReq.UserName.IsEmpty() || loginReq.Password.IsEmpty()) {
                     apiError.ErrorCode=BadRequest().StatusCode;
                     apiError.ErrorMessage="User name or password can not be blank";                    
                     return BadRequest(apiError);
