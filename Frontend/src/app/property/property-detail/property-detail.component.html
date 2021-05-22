@@ -2,20 +2,20 @@
   <div class="col-sm-4 p-0">
     <div class="card">
       <div class="card-img-wrapper">
-        <img *ngIf="property.Image" class="card-img-top" src="assets/images/{{property.Image}}.png">
-        <img *ngIf="!property.Image" class="card-img-top" src="assets/images/house_default.png">
+        <img *ngIf="property.image" class="card-img-top" src="assets/images/{{property.image}}.png">
+        <img *ngIf="!property.image" class="card-img-top" src="assets/images/house_default.png">
       </div>
       <div class="card-body">
-        <h1 class="card-title">{{property.Name}}</h1>
+        <h1 class="card-title">{{property.name}}</h1>
         <div>
-            <strong>{{property.BHK}} BHK {{property.PType}} @ ${{property.Price}}</strong>
+            <strong>{{property.bhk}} BHK {{property.propertyType}} @ ${{property.price}}</strong>
         </div>
         <div>
-           <strong>in {{property.City}}</strong>
+           <strong>in {{property.city}}</strong>
         </div> <hr>
         <div>
             <strong>Build Area: </strong>
-            {{property.BuiltArea}} Sqft
+            {{property.builtArea}} Sqft
         </div>
 
         <div>
@@ -24,7 +24,7 @@
         </div>
         <div>
             <strong>Furnishing Type: </strong>
-            {{property.FType}}
+            {{property.furnishingType}}
         </div>
       </div>
       <div class="card-footer">
@@ -44,7 +44,7 @@
               <div class="col-sm-6">
                   <div class="heading">
                       <strong>Project Name</strong>
-                      <p>{{property.Name}}</p>
+                      <p>{{property.name}}</p>
                   </div>
 
                   <div class="heading">
@@ -97,7 +97,7 @@
             <div class="heading">
                 <strong>{{property.Address}}</strong><br/>
                 <strong>{{property.Address2}}</strong><br/>
-                <strong>{{property.City}}</strong>
+                <strong>{{property.city}}</strong>
             </div>
         </div>
 

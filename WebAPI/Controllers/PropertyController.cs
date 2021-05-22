@@ -20,12 +20,13 @@ namespace WebAPI.Controllers
         }
 
         //property/type/1
-        [HttpGet("type/{sellRent}")]
+        [HttpGet("list/{sellRent}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetPropertyList(int sellRent)
         {
             var properties = await uow.PropertyRepository.GetPropertiesAsync(sellRent);
-            return Ok(properties);
+            var propertyListDTO = mapper.Map<IEnumerable<PropertyListDto>>(properties);
+            return Ok(propertyListDTO);
         }
         
     }
