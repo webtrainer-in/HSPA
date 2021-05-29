@@ -229,21 +229,20 @@ export class AddPropertyComponent implements OnInit {
         this.property.city = this.City.value;
         this.property.furnishingType = this.FType.value;
         this.property.price = this.Price.value;
-        this.property.Security = this.Security.value;
-        this.property.Maintenance = this.Maintenance.value;
+        this.property.security = this.Security.value;
+        this.property.maintenance = this.Maintenance.value;
         this.property.builtArea = this.BuiltArea.value;
-        this.property.CarpetArea = this.CarpetArea.value;
-        this.property.FloorNo = this.FloorNo.value;
-        this.property.TotalFloor = this.TotalFloor.value;
-        this.property.Address = this.Address.value;
-        this.property.Address2 = this.LandMark.value;
+        this.property.carpetArea = this.CarpetArea.value;
+        this.property.floorNo = this.FloorNo.value;
+        this.property.totalFloors = this.TotalFloor.value;
+        this.property.address = this.Address.value;
+        this.property.address2 = this.LandMark.value;
         this.property.readyToMove = this.RTM.value;
-        this.property.AOP = this.AOP.value;
-        this.property.Gated = this.Gated.value;
-        this.property.MainEntrance = this.MainEntrance.value;
-        this.property.Possession = this.PossessionOn.value;
-        this.property.Description = this.Description.value;
-        this.property.PostedOn = new Date().toString();
+        this.property.age = this.AOP.value;
+        this.property.gated = this.Gated.value;
+        this.property.mainEntrance = this.MainEntrance.value;
+        this.property.estPossessionOn = this.PossessionOn.value;
+        this.property.description = this.Description.value;
     }
 
     allTabsValid(): boolean {

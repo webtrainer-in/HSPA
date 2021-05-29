@@ -20,13 +20,19 @@
 
         <div>
             <strong>Carpet Area: </strong>
-            {{property.CarpetArea}} Sqft
+            {{property.carpetArea}} Sqft
         </div>
         <div>
             <strong>Furnishing Type: </strong>
             {{property.furnishingType}}
         </div>
-      </div>
+        <div>
+            <strong>Available for: </strong>
+            <span *ngIf="property.sellRent == 1">Purchase</span>
+            <span *ngIf="property.sellRent == 2">Rent</span>
+        </div>
+
+    </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
           <button class="btn btn-primary">Like</button>
@@ -49,44 +55,45 @@
 
                   <div class="heading">
                       <strong>Floor Number</strong>
-                      <p>{{property.FloorNo}}</p>
+                      <p>{{property.floorNo}} of {{property.totalFloors}}</p>
                   </div>
 
                   <div class="heading">
                       <strong>Age of Property</strong>
-                      <p>{{property.AOP}}</p>
+                      <p>{{property.age}}</p>
                   </div>
 
                   <div class="heading">
                       <strong>Posession</strong>
-                      <p>{{property.Possession}}</p>
+                      <p>{{property.estPossessionOn | date}}</p>
                   </div>
               </div>
 
               <div class="col-sm-6">
                   <div class="heading">
                       <strong>Main Entrance</strong>
-                      <p>{{property.MainEntrance}}</p>
+                      <p>{{property.mainEntrance}}</p>
                   </div>
 
                   <div class="heading">
                       <strong>Gated Community</strong>
-                      <p>{{property.Gated}}</p>
+                      <p *ngIf="property.gated">Yes</p>
+                      <p *ngIf="!property.gated">No</p>
                   </div>
 
                   <div class="heading">
                       <strong>Security Deposit</strong>
-                      <p>{{property.Security}}</p>
+                      <p>{{property.security}}</p>
                   </div>
                   <div class="heading">
                       <strong>Maintenance</strong>
-                      <p>{{property.Maintenance}}</p>
+                      <p>{{property.maintenance}}</p>
                   </div>
               </div>
               <div class="col-sm-12">
                   <div class="heading">
                       <strong>About Property</strong>
-                      <p>{{property.Description}}</p>
+                      <p>{{property.description}}</p>
                   </div>
               </div>
             </div>
@@ -95,8 +102,8 @@
           <div class="col-sm-12">
             <h1>Address</h1>
             <div class="heading">
-                <strong>{{property.Address}}</strong><br/>
-                <strong>{{property.Address2}}</strong><br/>
+                <strong>{{property.address}}</strong><br/>
+                <strong>{{property.address2}}</strong><br/>
                 <strong>{{property.city}}</strong>
             </div>
         </div>
