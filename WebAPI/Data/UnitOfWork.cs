@@ -18,6 +18,12 @@ namespace WebAPI.Data
         public IUserRepository UserRepository =>         
             new UserRepository(dc);
 
+        public IFurnishingTypeRepository FurnishingTypeRepository =>         
+            new FurnishingTypeRepository(dc);
+
+        public IPropertyTypeRepository PropertyTypeRepository =>         
+            new PropertyTypeRepository(dc);
+
         public IPropertyRepository PropertyRepository => 
             new PropertyRepository(dc);
 
