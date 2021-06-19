@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Dtos;
 using WebAPI.Interfaces;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -19,7 +20,7 @@ namespace WebAPI.Controllers
             this.mapper = mapper;
         }
 
-        //property/type/1
+        //property/list/1
         [HttpGet("list/{sellRent}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetPropertyList(int sellRent)
@@ -29,7 +30,7 @@ namespace WebAPI.Controllers
             return Ok(propertyListDTO);
         }
 
-        //property/type/1
+        //property/detail/1
         [HttpGet("detail/{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetPropertyDetail(int id)
@@ -37,6 +38,20 @@ namespace WebAPI.Controllers
             var property = await uow.PropertyRepository.GetPropertyDetailAsync(id);
             var propertyDTO = mapper.Map<PropertyDetailDto>(property);
             return Ok(propertyDTO);
+        }
+
+
+        //property/add
+        [HttpPost("add")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AddProperty(PropertyDto propertyDto)
+        {
+            var property = mapper.Map<Property>(propertyDto);
+            property.PostedBy=1;
+            property.LastUpdatedBy=1;
+            uow.PropertyRepository.AddProperty(property);
+            await uow.SaveAsync();
+            return StatusCode(201);
         }
 
 

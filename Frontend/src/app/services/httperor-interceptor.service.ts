@@ -56,7 +56,7 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
         } else {
             // server side error
             if (error.status!==0) {
-                errorMessage = error.error.errorMessage;
+                {errorMessage = error.error.errorMessage;}
             }
         }
         return errorMessage;

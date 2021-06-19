@@ -35,15 +35,7 @@ export class HousingService {
         return this.http.get<Property[]>(this.baseUrl + '/property/list/'+SellRent.toString());
     }
     addProperty(property: Property) {
-        let newProp = [property];
-
-        // Add new property in array if newProp alreay exists in local storage
-        if (localStorage.getItem('newProp')) {
-            newProp = [property,
-                ...JSON.parse(localStorage.getItem('newProp'))];
-        }
-
-        localStorage.setItem('newProp', JSON.stringify(newProp));
+        return this.http.post(this.baseUrl + '/property/add', property);
     }
 
     newPropID() {
@@ -56,7 +48,7 @@ export class HousingService {
         }
     }
 
-    getPropertyAge(dateofEstablishment: Date): string
+    getPropertyAge(dateofEstablishment: string): string
     {
         const today = new Date();
         const estDate = new Date(dateofEstablishment);
