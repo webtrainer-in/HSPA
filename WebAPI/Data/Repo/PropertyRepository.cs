@@ -31,6 +31,7 @@ namespace WebAPI.Data.Repo
             .Include(p => p.PropertyType)
             .Include(p => p.City)
             .Include(p => p.FurnishingType)
+            .Include(p => p.Photos)
             .Where(p => p.SellRent == sellRent)
             .ToListAsync();
 
