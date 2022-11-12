@@ -79,4 +79,14 @@ export class HousingService {
         return age.toString();
     }
 
+    setPrimaryPhoto(propertyId: number, propertyPhotoId: string) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                Authorization: 'Bearer '+ localStorage.getItem('token')
+            })
+        };
+        return this.http.post(this.baseUrl + '/property/set-primary-photo/'+String(propertyId)
+            +'/'+propertyPhotoId, {}, httpOptions);
+    }
+
 }

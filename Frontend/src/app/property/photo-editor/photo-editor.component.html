@@ -6,6 +6,7 @@
             <button class="btn btn-sm"
             [disabled]="photo.isPrimary"
             [ngClass]='photo.isPrimary ? "btn-success active" : "btn-outline-success"'
+            (click)="setPrimaryPhoto(property.id, photo)"
             >Main</button>
             <button class="btn btn-sm  btn-danger"><i class="fa fa-trash"></i></button>
         </div>
