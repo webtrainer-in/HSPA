@@ -31,4 +31,11 @@ export class PhotoEditorComponent implements OnInit {
         });
     }
 
+    deletePhoto(propertyId: number, photo: Photo) {
+        this.housingService.deletePhoto(propertyId,photo.publicId).subscribe(()=>{
+            this.property.photos = this.property.photos.filter(p =>
+                p.publicId !== photo.publicId);
+        });
+    }
+
 }
