@@ -6,7 +6,7 @@ import { IPropertyBase } from 'src/app/model/ipropertybase';
 import { Property } from 'src/app/model/property';
 import { HousingService } from 'src/app/services/housing.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
-import { Ikeyvaluepair } from 'src/app/model/ikeyvaluepair';
+import { Ikeyvaluepair } from 'src/app/model/IKeyValuePair';
 import { DatePipe } from '@angular/common';
 
 
@@ -17,15 +17,15 @@ import { DatePipe } from '@angular/common';
 })
 export class AddPropertyComponent implements OnInit {
     // @ViewChild('Form') addPropertyForm: NgForm;
-    @ViewChild('formTabs') formTabs: TabsetComponent;
-    addPropertyForm: FormGroup;
-    nextClicked: boolean;
+    @ViewChild('formTabs') formTabs!: TabsetComponent;
+    addPropertyForm!: FormGroup;
+    nextClicked: boolean = false;
     property = new Property();
 
     // Will come from masters
-    propertyTypes: Ikeyvaluepair[];
-    furnishTypes: Ikeyvaluepair[];
-    cityList: any[];
+    propertyTypes?: Ikeyvaluepair[];
+    furnishTypes?: Ikeyvaluepair[];
+    cityList?: any[];
 
     propertyView: IPropertyBase = {
         id: null,
@@ -110,105 +110,105 @@ export class AddPropertyComponent implements OnInit {
     // #region <Getter Methods>
     // #region <FormGroups>
     get BasicInfo() {
-        return this.addPropertyForm.controls.BasicInfo as FormGroup;
+        return this.addPropertyForm.controls['BasicInfo'] as FormGroup;
     }
 
     get PriceInfo() {
-        return this.addPropertyForm.controls.PriceInfo as FormGroup;
+        return this.addPropertyForm.controls["PriceInfo"] as FormGroup;
     }
 
     get AddressInfo() {
-        return this.addPropertyForm.controls.AddressInfo as FormGroup;
+        return this.addPropertyForm.controls["AddressInfo"] as FormGroup;
     }
 
     get OtherInfo() {
-        return this.addPropertyForm.controls.OtherInfo as FormGroup;
+        return this.addPropertyForm.controls["OtherInfo"] as FormGroup;
     }
     // #endregion
 
     // #region <Form Controls>
     get SellRent() {
-        return this.BasicInfo.controls.SellRent as FormControl;
+        return this.BasicInfo.controls["SellRent"] as FormControl;
     }
 
     get BHK() {
-        return this.BasicInfo.controls.BHK as FormControl;
+        return this.BasicInfo.controls["BHK"] as FormControl;
     }
 
     get PType() {
-        return this.BasicInfo.controls.PType as FormControl;
+        return this.BasicInfo.controls["PType"] as FormControl;
     }
 
     get FType() {
-        return this.BasicInfo.controls.FType as FormControl;
+        return this.BasicInfo.controls["FType"] as FormControl;
     }
 
     get Name() {
-        return this.BasicInfo.controls.Name as FormControl;
+        return this.BasicInfo.controls["Name"] as FormControl;
     }
 
     get City() {
-        return this.BasicInfo.controls.City as FormControl;
+        return this.BasicInfo.controls["City"] as FormControl;
     }
 
     get Price() {
-        return this.PriceInfo.controls.Price as FormControl;
+        return this.PriceInfo.controls["Price"] as FormControl;
     }
 
     get BuiltArea() {
-        return this.PriceInfo.controls.BuiltArea as FormControl;
+        return this.PriceInfo.controls["BuiltArea"] as FormControl;
     }
 
     get CarpetArea() {
-        return this.PriceInfo.controls.CarpetArea as FormControl;
+        return this.PriceInfo.controls["CarpetArea"] as FormControl;
     }
 
     get Security() {
-        return this.PriceInfo.controls.Security as FormControl;
+        return this.PriceInfo.controls["Security"] as FormControl;
     }
 
     get Maintenance() {
-        return this.PriceInfo.controls.Maintenance as FormControl;
+        return this.PriceInfo.controls["Maintenance"] as FormControl;
     }
 
     get FloorNo() {
-        return this.AddressInfo.controls.FloorNo as FormControl;
+        return this.AddressInfo.controls["FloorNo"] as FormControl;
     }
 
     get TotalFloor() {
-        return this.AddressInfo.controls.TotalFloor as FormControl;
+        return this.AddressInfo.controls["TotalFloor"] as FormControl;
     }
 
     get Address() {
-        return this.AddressInfo.controls.Address as FormControl;
+        return this.AddressInfo.controls["Address"] as FormControl;
     }
 
     get LandMark() {
-        return this.AddressInfo.controls.LandMark as FormControl;
+        return this.AddressInfo.controls["LandMark"] as FormControl;
     }
 
     get RTM() {
-        return this.OtherInfo.controls.RTM as FormControl;
+        return this.OtherInfo.controls["RTM"] as FormControl;
     }
 
     get PossessionOn() {
-        return this.OtherInfo.controls.PossessionOn as FormControl;
+        return this.OtherInfo.controls["PossessionOn"] as FormControl;
     }
 
     get AOP() {
-        return this.OtherInfo.controls.AOP as FormControl;
+        return this.OtherInfo.controls["AOP"] as FormControl;
     }
 
     get Gated() {
-        return this.OtherInfo.controls.Gated as FormControl;
+        return this.OtherInfo.controls["Gated"] as FormControl;
     }
 
     get MainEntrance() {
-        return this.OtherInfo.controls.MainEntrance as FormControl;
+        return this.OtherInfo.controls["MainEntrance"] as FormControl;
     }
 
     get Description() {
-        return this.OtherInfo.controls.Description as FormControl;
+        return this.OtherInfo.controls["Description"] as FormControl;
     }
 
     // #endregion
@@ -261,7 +261,7 @@ export class AddPropertyComponent implements OnInit {
         this.property.gated = this.Gated.value;
         this.property.mainEntrance = this.MainEntrance.value;
         this.property.estPossessionOn =
-            this.datePipe.transform(this.PossessionOn.value,'MM/dd/yyyy');
+            this.datePipe.transform(this.PossessionOn.value,'MM/dd/yyyy') as string;
         this.property.description = this.Description.value;
     }
 
