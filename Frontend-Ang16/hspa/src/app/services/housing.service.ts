@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Property } from '../model/property';
 import { environment } from '../../environments/environment';
-import { Ikeyvaluepair } from '../model/ikeyvaluepair';
+import { Ikeyvaluepair } from '../model/IKeyValuePair';
 
 
 @Injectable({
@@ -32,7 +32,7 @@ export class HousingService {
     }
 
     getAllProperties(SellRent?: number): Observable<Property[]> {
-        return this.http.get<Property[]>(this.baseUrl + '/property/list/'+SellRent.toString());
+        return this.http.get<Property[]>(`${this.baseUrl}/property/list/${SellRent}`);
     }
     addProperty(property: Property) {
         const httpOptions = {
@@ -45,8 +45,8 @@ export class HousingService {
 
     newPropID() {
         if (localStorage.getItem('PID')) {
-            localStorage.setItem('PID', String(+localStorage.getItem('PID') + 1));
-            return +localStorage.getItem('PID');
+            localStorage.setItem('PID', String(+(localStorage.getItem('PID') || 0) + 1));
+            return +( localStorage.getItem('PID') || 0);
         } else {
             localStorage.setItem('PID', '101');
             return 101;
