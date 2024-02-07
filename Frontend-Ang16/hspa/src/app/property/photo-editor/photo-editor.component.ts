@@ -12,19 +12,16 @@ import { AlertifyService } from 'src/app/services/alertify.service';
     styleUrls: ['./photo-editor.component.css']
 })
 export class PhotoEditorComponent implements OnInit {
-    @Input() property: Property;
+    @Input() property!: Property;
     @Output() mainPhotoChangedEvent = new EventEmitter<string>();
     @Output() photosChangedEvent = new EventEmitter();
 
-    uploader: FileUploader;
-    hasBaseDropZoneOver: boolean;
+    uploader!: FileUploader;
+    hasBaseDropZoneOver!: boolean;
     baseUrl = environment.baseUrl;
     maxAllowedFileSize=1*1024*1024;
 
-    uploaderProgressBarPercentage: number;
-    filesCounter: number;
-
-    response: string;
+    response!: string;
 
     constructor(private housingService: HousingService, private alertify: AlertifyService) {
 
@@ -46,17 +43,15 @@ export class PhotoEditorComponent implements OnInit {
         });
 
         this.uploader.onAfterAddingFile = (file) => {
-            this.filesCounter++;
             file.withCredentials = false;
         };
 
         this.uploader.onSuccessItem = (item, response, status, headers) => {
             if (response) {
                 const photo = JSON.parse(response);
-                this.property.photos.push(photo);
+                this.property.photos!.push(photo);
                 this.photosChangedEmitterEvent();
             }
-            this.uploaderProgressBarPercentage = Math.floor((this.filesCounter - this.uploader.getReadyItems().length)/(this.filesCounter)*100);
         };
 
         this.uploader.onErrorItem = (item, response, status, headers) => {
@@ -71,10 +66,6 @@ export class PhotoEditorComponent implements OnInit {
 
             this.alertify.error(errorMessage);
         };
-
-        this.uploader.onCompleteAll = () => {
-            this.uploaderProgressBarPercentage, this.filesCounter = 0;
-        }
     }
 
     mainPhotoChanged(url: string){
@@ -87,13 +78,12 @@ export class PhotoEditorComponent implements OnInit {
 
     ngOnInit(): void {
         this.initializeFileUploader();
-        this.uploaderProgressBarPercentage, this.filesCounter = 0;
     }
 
     setPrimaryPhoto(propertyId: number, photo: Photo) {
         this.housingService.setPrimaryPhoto(propertyId,photo.publicId).subscribe(()=>{
             this.mainPhotoChanged(photo.imageUrl);
-            this.property.photos.forEach(p => {
+            this.property.photos!.forEach(p => {
                 if (p.isPrimary) {p.isPrimary = false;}
                 if (p.publicId === photo.publicId) {p.isPrimary = true;}
             });
@@ -102,7 +92,7 @@ export class PhotoEditorComponent implements OnInit {
 
     deletePhoto(propertyId: number, photo: Photo) {
         this.housingService.deletePhoto(propertyId,photo.publicId).subscribe(()=>{
-            this.property.photos = this.property.photos.filter(p =>
+            this.property.photos = this.property.photos!.filter(p =>
                 p.publicId !== photo.publicId);
                 this.photosChangedEmitterEvent();
         });
