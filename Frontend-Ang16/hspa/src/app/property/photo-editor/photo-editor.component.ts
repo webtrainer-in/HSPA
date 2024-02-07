@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Photo } from 'src/app/model/Photo';
+import { Photo } from 'src/app/model/photo';
 import { Property } from 'src/app/model/property';
 import { HousingService } from 'src/app/services/housing.service';
 import { FileUploader } from 'ng2-file-upload';
