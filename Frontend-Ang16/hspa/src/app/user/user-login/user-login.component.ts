@@ -21,10 +21,10 @@ export class UserLoginComponent implements OnInit {
     onLogin(loginForm: NgForm) {
         console.log(loginForm.value);
         // const token = this.authService.authUser(loginForm.value);
-        this.authService.authUser(loginForm.value).subscribe(
-            (response: UserForLogin) => {
+        this.authService.authUser(loginForm.value).subscribe({
+            next: response => {
                 console.log(response);
-                const user = response;
+                const user = response as UserForLogin;
                 if (user) {
                     localStorage.setItem('token', user.token);
                     localStorage.setItem('userName', user.userName);
@@ -32,6 +32,8 @@ export class UserLoginComponent implements OnInit {
                     this.router.navigate(['/']);
                 }
             }
+        }
+            
         );
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { UserForRegister } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -11,9 +11,9 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class UserRegisterComponent implements OnInit {
 
-    registerationForm: FormGroup;
-    user: UserForRegister;
-    userSubmitted: boolean;
+    registerationForm!: FormGroup;
+    user?: UserForRegister;
+    userSubmitted?: boolean;
     constructor(private fb: FormBuilder,
                 private authService: AuthService,
                 private alertify: AlertifyService ) { }
@@ -37,13 +37,13 @@ export class UserRegisterComponent implements OnInit {
             password: [null, [Validators.required, Validators.minLength(8)]],
             confirmPassword: [null, Validators.required],
             mobile: [null, [Validators.required, Validators.maxLength(10)]]
-        }, {validators: this.passwordMatchingValidatior});
+        }, {validators: passwordMatchingValidator});
     }
 
-    passwordMatchingValidatior(fg: FormGroup): Validators {
-        return fg.get('password').value === fg.get('confirmPassword').value ? null :
-            {notmatched: true};
-    }
+    // passwordMatchingValidatior(fg: FormGroup): Validators {
+    //     return fg.get('password').value === fg.get('confirmPassword').value ? null :
+    //         {notmatched: true};
+    // }
 
 
     onSubmit() {
@@ -96,3 +96,15 @@ export class UserRegisterComponent implements OnInit {
     }
     // ------------------------
 }
+
+export const passwordMatchingValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const password = control.get('password');
+    const confirm = control.get('confirmPassword');
+    return password && confirm && password.value === confirm.value
+      ? null
+      : {
+          notmatched: true,
+        };
+  };
