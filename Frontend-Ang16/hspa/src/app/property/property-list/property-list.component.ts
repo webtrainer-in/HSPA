@@ -10,7 +10,7 @@ import { IPropertyBase } from 'src/app/model/ipropertybase';
 })
 export class PropertyListComponent implements OnInit {
     SellRent = 1;
-    properties: IPropertyBase[];
+    properties: IPropertyBase[] = [];
     Today = new Date();
     City = '';
     SearchCity = '';
@@ -23,15 +23,16 @@ export class PropertyListComponent implements OnInit {
         if (this.route.snapshot.url.toString()) {
             this.SellRent = 2; // Means we are on rent-property URL else we are on base URL
         }
-        this.housingService.getAllProperties(this.SellRent).subscribe(
-            data => {
+        this.housingService.getAllProperties(this.SellRent).subscribe({
+            next: data => {
                 this.properties = data;
                 console.log(data);
-            }, error => {
+            },
+            error: error => {
                 console.log('httperror:');
                 console.log(error);
             }
-        );
+        });
     }
 
     onCityFilter() {

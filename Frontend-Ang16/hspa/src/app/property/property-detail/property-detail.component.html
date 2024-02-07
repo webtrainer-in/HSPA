@@ -111,12 +111,21 @@
 
         </tab>
         <tab heading="Photos">
-          <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+          <carousel #carousel [interval]="0" [showIndicators]="false">
+            <slide *ngFor="let slide of slides; let index = index">
+              <img [src]="slide.image" alt="image slide" style="display: block; width: 100%; height: 100%" />
+            </slide>
+          </carousel>
+          <span class="d-inline-block w-100 text-center">
+            <span *ngFor="let slide of slides; let index = index">
+              <img class="btn d-inline w-25 h-25" [src]="slide.image" alt="image slide"
+                (click)="carousel.activeSlide = index" />
+            </span>
+          </span>
         </tab>
 
         <tab heading="Upload/Edit Photos">
-          <app-photo-editor [property]="property" (mainPhotoChangedEvent)="changePrimaryPhoto($event)"
-            (photosChangedEvent)="onPhotosChange()">
+          <app-photo-editor [property]="property" (mainPhotoChangedEvent)="changePrimaryPhoto($event)">
           </app-photo-editor>
         </tab>
         <tab heading="Contact">
