@@ -8,7 +8,7 @@ import { AlertifyService } from '../services/alertify.service';
 })
 export class NavBarComponent implements OnInit {
 
-    loggedinUser: string;
+    loggedinUser: string | null = null;
     constructor(private alertify: AlertifyService) { }
 
     ngOnInit() {
