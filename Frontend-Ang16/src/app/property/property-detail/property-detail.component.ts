@@ -55,6 +55,10 @@ export class PropertyDetailComponent implements OnInit {
         this.mainPhotoUrl = mainPhotoUrl;
     }
 
+    onPhotosChange() {
+      this.slides = this.getPropertyPhotos();
+    }
+
     getPropertyPhotos(): { image: string }[] {
         const photoUrls: { image: string }[] = [];
         for (const photo of this.property.photos!) {

@@ -125,7 +125,8 @@
         </tab>
 
         <tab heading="Upload/Edit Photos">
-          <app-photo-editor [property]="property" (mainPhotoChangedEvent)="changePrimaryPhoto($event)">
+          <app-photo-editor [property]="property" (photosChangedEvent)="onPhotosChange()"
+            (mainPhotoChangedEvent)="changePrimaryPhoto($event)">
           </app-photo-editor>
         </tab>
         <tab heading="Contact">
