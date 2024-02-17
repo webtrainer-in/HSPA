@@ -21,7 +21,7 @@ export class PhotoEditorComponent implements OnInit {
     baseUrl = environment.baseUrl;
     maxAllowedFileSize=1*1024*1024;
 
-    uploaderProgressBarPercentage: number;
+    uploaderProgressBarPercentage=0;
     filesCounter: number;
 
     response: string;
@@ -74,7 +74,7 @@ export class PhotoEditorComponent implements OnInit {
 
         this.uploader.onCompleteAll = () => {
             this.uploaderProgressBarPercentage, this.filesCounter = 0;
-        }
+        };
     }
 
     mainPhotoChanged(url: string){
@@ -104,7 +104,7 @@ export class PhotoEditorComponent implements OnInit {
         this.housingService.deletePhoto(propertyId,photo.publicId).subscribe(()=>{
             this.property.photos = this.property.photos.filter(p =>
                 p.publicId !== photo.publicId);
-                this.photosChangedEmitterEvent();
+            this.photosChangedEmitterEvent();
         });
     }
 
