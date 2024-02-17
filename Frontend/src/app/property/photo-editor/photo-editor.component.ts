@@ -14,11 +14,15 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 export class PhotoEditorComponent implements OnInit {
     @Input() property: Property;
     @Output() mainPhotoChangedEvent = new EventEmitter<string>();
+    @Output() photosChangedEvent = new EventEmitter();
 
     uploader: FileUploader;
     hasBaseDropZoneOver: boolean;
     baseUrl = environment.baseUrl;
     maxAllowedFileSize=1*1024*1024;
+
+    uploaderProgressBarPercentage=0;
+    filesCounter: number;
 
     response: string;
 
@@ -42,6 +46,7 @@ export class PhotoEditorComponent implements OnInit {
         });
 
         this.uploader.onAfterAddingFile = (file) => {
+            this.filesCounter++;
             file.withCredentials = false;
         };
 
@@ -49,7 +54,9 @@ export class PhotoEditorComponent implements OnInit {
             if (response) {
                 const photo = JSON.parse(response);
                 this.property.photos.push(photo);
+                this.photosChangedEmitterEvent();
             }
+            this.uploaderProgressBarPercentage = Math.floor((this.filesCounter - this.uploader.getReadyItems().length)/(this.filesCounter)*100);
         };
 
         this.uploader.onErrorItem = (item, response, status, headers) => {
@@ -64,14 +71,23 @@ export class PhotoEditorComponent implements OnInit {
 
             this.alertify.error(errorMessage);
         };
+
+        this.uploader.onCompleteAll = () => {
+            this.uploaderProgressBarPercentage, this.filesCounter = 0;
+        };
     }
 
     mainPhotoChanged(url: string){
         this.mainPhotoChangedEvent.emit(url);
     }
 
+    photosChangedEmitterEvent() {
+        this.photosChangedEvent.emit();
+    }
+
     ngOnInit(): void {
         this.initializeFileUploader();
+        this.uploaderProgressBarPercentage, this.filesCounter = 0;
     }
 
     setPrimaryPhoto(propertyId: number, photo: Photo) {
@@ -88,6 +104,7 @@ export class PhotoEditorComponent implements OnInit {
         this.housingService.deletePhoto(propertyId,photo.publicId).subscribe(()=>{
             this.property.photos = this.property.photos.filter(p =>
                 p.publicId !== photo.publicId);
+            this.photosChangedEmitterEvent();
         });
     }
 

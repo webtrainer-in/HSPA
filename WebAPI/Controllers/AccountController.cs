@@ -34,9 +34,9 @@ namespace WebAPI.Controllers
 
             if (user == null)
             {
-                apiError.ErrorCode=Unauthorized().StatusCode;
-                apiError.ErrorMessage="Invalid user name or password";
-                apiError.ErrorDetails="This error appear when provided user id or password does not exists";
+                apiError.ErrorCode = Unauthorized().StatusCode;
+                apiError.ErrorMessage = "Invalid user name or password";
+                apiError.ErrorDetails = "This error appear when provided user id or password does not exists";
                 return Unauthorized(apiError);
             }
 
@@ -51,17 +51,19 @@ namespace WebAPI.Controllers
         {
             ApiError apiError = new ApiError();
 
-            if(loginReq.UserName.IsEmpty() || loginReq.Password.IsEmpty()) {
-                    apiError.ErrorCode=BadRequest().StatusCode;
-                    apiError.ErrorMessage="User name or password can not be blank";                    
-                    return BadRequest(apiError);
-            }                    
-
-            if (await uow.UserRepository.UserAlreadyExists(loginReq.UserName)) {
-                apiError.ErrorCode=BadRequest().StatusCode;
-                apiError.ErrorMessage="User already exists, please try different user name";
+            if (loginReq.UserName.IsEmpty() || loginReq.Password.IsEmpty())
+            {
+                apiError.ErrorCode = BadRequest().StatusCode;
+                apiError.ErrorMessage = "User name or password can not be blank";
                 return BadRequest(apiError);
-            }                
+            }
+
+            if (await uow.UserRepository.UserAlreadyExists(loginReq.UserName))
+            {
+                apiError.ErrorCode = BadRequest().StatusCode;
+                apiError.ErrorMessage = "User already exists, please try different user name";
+                return BadRequest(apiError);
+            }
 
             uow.UserRepository.Register(loginReq.UserName, loginReq.Password);
             await uow.SaveAsync();
@@ -85,7 +87,7 @@ namespace WebAPI.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(60 * 24),
                 SigningCredentials = signingCredentials
             };
 
