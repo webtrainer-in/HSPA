@@ -27,22 +27,10 @@ export class PropertyDetailComponent implements OnInit {
         this.route.data.subscribe(
             (data: Property) => {
                 this.property = data['prp'];
-                console.log(this.property.photos);
             }
         );
 
         this.property.age = this.housingService.getPropertyAge(this.property.estPossessionOn);
-
-        // this.route.params.subscribe(
-        //   (params) => {
-        //     this.propertyId = +params['id'];
-        //     this.housingService.getProperty(this.propertyId).subscribe(
-        //       (data: Property) => {
-        //         this.property = data;
-        //       }, error => this.router.navigate(['/'])
-        //     );
-        //   }
-        // );
 
         this.galleryOptions = [
             {
@@ -59,6 +47,10 @@ export class PropertyDetailComponent implements OnInit {
 
     changePrimaryPhoto(mainPhotoUrl: string) {
         this.mainPhotoUrl = mainPhotoUrl;
+    }
+
+    onPhotosChange() {
+        this.galleryImages = this.getPropertyPhotos();
     }
 
     getPropertyPhotos(): NgxGalleryImage[] {

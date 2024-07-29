@@ -8,38 +8,39 @@
       <div class="card-body">
         <h1 class="card-title">{{property.name}}</h1>
         <div>
-            <strong>{{property.bhk}} BHK {{property.propertyType}} @ ${{property.price}}</strong>
+          <strong>{{property.bhk}} BHK {{property.propertyType}} &#64; ${{property.price}}</strong>
         </div>
         <div>
-           <strong>in {{property.city}}</strong>
-        </div> <hr>
-        <div>
-            <strong>Build Area: </strong>
-            {{property.builtArea}} Sqft
+          <strong>in {{property.city}}</strong>
         </div>
-
+        <hr>
         <div>
-            <strong>Carpet Area: </strong>
-            {{property.carpetArea}} Sqft
-        </div>
-        <div>
-            <strong>Furnishing Type: </strong>
-            {{property.furnishingType}}
-        </div>
-        <div>
-            <strong>Available for: </strong>
-            <span *ngIf="property.sellRent == 1">Purchase</span>
-            <span *ngIf="property.sellRent == 2">Rent</span>
+          <strong>Build Area: </strong>
+          {{property.builtArea}} Sqft
         </div>
 
-    </div>
+        <div>
+          <strong>Carpet Area: </strong>
+          {{property.carpetArea}} Sqft
+        </div>
+        <div>
+          <strong>Furnishing Type: </strong>
+          {{property.furnishingType}}
+        </div>
+        <div>
+          <strong>Available for: </strong>
+          <span *ngIf="property.sellRent == 1">Purchase</span>
+          <span *ngIf="property.sellRent == 2">Rent</span>
+        </div>
+
+      </div>
       <div class="card-footer">
         <div class="btn-group d-flex">
           <button class="btn btn-primary">Like</button>
           <button class="btn btn-success">Message</button>
         </div>
       </div>
-  </div>
+    </div>
   </div>
   <div class="col-sm-8 p-0">
     <div class="tab-panel p-3">
@@ -47,66 +48,66 @@
         <tab heading="Overview">
           <h1>Overview</h1>
           <div class="row">
-              <div class="col-sm-6">
-                  <div class="heading">
-                      <strong>Project Name</strong>
-                      <p>{{property.name}}</p>
-                  </div>
-
-                  <div class="heading">
-                      <strong>Floor Number</strong>
-                      <p>{{property.floorNo}} of {{property.totalFloors}}</p>
-                  </div>
-
-                  <div class="heading">
-                      <strong>Age of Property</strong>
-                      <p>{{property.age}}</p>
-                  </div>
-
-                  <div class="heading">
-                      <strong>Posession</strong>
-                      <p>{{property.estPossessionOn | date}}</p>
-                  </div>
+            <div class="col-sm-6">
+              <div class="heading">
+                <strong>Project Name</strong>
+                <p>{{property.name}}</p>
               </div>
 
-              <div class="col-sm-6">
-                  <div class="heading">
-                      <strong>Main Entrance</strong>
-                      <p>{{property.mainEntrance}}</p>
-                  </div>
-
-                  <div class="heading">
-                      <strong>Gated Community</strong>
-                      <p *ngIf="property.gated">Yes</p>
-                      <p *ngIf="!property.gated">No</p>
-                  </div>
-
-                  <div class="heading">
-                      <strong>Security Deposit</strong>
-                      <p>{{property.security}}</p>
-                  </div>
-                  <div class="heading">
-                      <strong>Maintenance</strong>
-                      <p>{{property.maintenance}}</p>
-                  </div>
+              <div class="heading">
+                <strong>Floor Number</strong>
+                <p>{{property.floorNo}} of {{property.totalFloors}}</p>
               </div>
-              <div class="col-sm-12">
-                  <div class="heading">
-                      <strong>About Property</strong>
-                      <p>{{property.description}}</p>
-                  </div>
+
+              <div class="heading">
+                <strong>Age of Property</strong>
+                <p>{{property.age}}</p>
+              </div>
+
+              <div class="heading">
+                <strong>Posession</strong>
+                <p>{{property.estPossessionOn | date}}</p>
               </div>
             </div>
+
+            <div class="col-sm-6">
+              <div class="heading">
+                <strong>Main Entrance</strong>
+                <p>{{property.mainEntrance}}</p>
+              </div>
+
+              <div class="heading">
+                <strong>Gated Community</strong>
+                <p *ngIf="property.gated">Yes</p>
+                <p *ngIf="!property.gated">No</p>
+              </div>
+
+              <div class="heading">
+                <strong>Security Deposit</strong>
+                <p>{{property.security}}</p>
+              </div>
+              <div class="heading">
+                <strong>Maintenance</strong>
+                <p>{{property.maintenance}}</p>
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <div class="heading">
+                <strong>About Property</strong>
+                <p>{{property.description}}</p>
+              </div>
+            </div>
+          </div>
         </tab>
         <tab heading="Address">
           <div class="col-sm-12">
             <h1>Address</h1>
             <div class="heading">
-                <strong>{{property.address}}</strong><br/>
-                <strong>{{property.address2}}</strong><br/>
-                <strong>{{property.city}}</strong>
+              <strong>{{property.address}}</strong><br />
+              <strong>{{property.address2}}</strong><br />
+              <strong>{{property.city}}</strong>
             </div>
-        </div>
+          </div>
 
         </tab>
         <tab heading="Photos">
@@ -114,8 +115,9 @@
         </tab>
 
         <tab heading="Upload/Edit Photos">
-            <app-photo-editor [property]="property"
-            (mainPhotoChangedEvent)="changePrimaryPhoto($event)"></app-photo-editor>
+          <app-photo-editor [property]="property" (mainPhotoChangedEvent)="changePrimaryPhoto($event)"
+            (photosChangedEvent)="onPhotosChange()">
+          </app-photo-editor>
         </tab>
         <tab heading="Contact">
           <h1>Contact Detail</h1>

@@ -14,13 +14,14 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 export class PhotoEditorComponent implements OnInit {
     @Input() property: Property;
     @Output() mainPhotoChangedEvent = new EventEmitter<string>();
+    @Output() photosChangedEvent = new EventEmitter();
 
     uploader: FileUploader;
     hasBaseDropZoneOver: boolean;
     baseUrl = environment.baseUrl;
     maxAllowedFileSize=1*1024*1024;
 
-    uploaderProgressBarPercentage: number;
+    uploaderProgressBarPercentage=0;
     filesCounter: number;
 
     response: string;
@@ -53,6 +54,7 @@ export class PhotoEditorComponent implements OnInit {
             if (response) {
                 const photo = JSON.parse(response);
                 this.property.photos.push(photo);
+                this.photosChangedEmitterEvent();
             }
             this.uploaderProgressBarPercentage = Math.floor((this.filesCounter - this.uploader.getReadyItems().length)/(this.filesCounter)*100);
         };
@@ -72,11 +74,15 @@ export class PhotoEditorComponent implements OnInit {
 
         this.uploader.onCompleteAll = () => {
             this.uploaderProgressBarPercentage, this.filesCounter = 0;
-        }
+        };
     }
 
     mainPhotoChanged(url: string){
         this.mainPhotoChangedEvent.emit(url);
+    }
+
+    photosChangedEmitterEvent() {
+        this.photosChangedEvent.emit();
     }
 
     ngOnInit(): void {
@@ -98,6 +104,7 @@ export class PhotoEditorComponent implements OnInit {
         this.housingService.deletePhoto(propertyId,photo.publicId).subscribe(()=>{
             this.property.photos = this.property.photos.filter(p =>
                 p.publicId !== photo.publicId);
+            this.photosChangedEmitterEvent();
         });
     }
 
