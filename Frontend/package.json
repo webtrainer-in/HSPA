@@ -24,8 +24,10 @@
         "alertifyjs": "^1.13.1",
         "bootstrap": "^4.5.0",
         "firebase": "^7.13.1",
+        "jquery": "^1.9.1",
         "ng2-file-upload": "^1.4.0",
         "ngx-bootstrap": "^5.6.1",
+        "popper.js": "^1.16.1",
         "rxjs": "^6.5.5",
         "tslib": "^2.0.0",
         "zone.js": "^0.10.3"

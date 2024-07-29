@@ -20,6 +20,9 @@ export class PhotoEditorComponent implements OnInit {
     baseUrl = environment.baseUrl;
     maxAllowedFileSize=1*1024*1024;
 
+    uploaderProgressBarPercentage: number;
+    filesCounter: number;
+
     response: string;
 
     constructor(private housingService: HousingService, private alertify: AlertifyService) {
@@ -42,6 +45,7 @@ export class PhotoEditorComponent implements OnInit {
         });
 
         this.uploader.onAfterAddingFile = (file) => {
+            this.filesCounter++;
             file.withCredentials = false;
         };
 
@@ -50,6 +54,7 @@ export class PhotoEditorComponent implements OnInit {
                 const photo = JSON.parse(response);
                 this.property.photos.push(photo);
             }
+            this.uploaderProgressBarPercentage = Math.floor((this.filesCounter - this.uploader.getReadyItems().length)/(this.filesCounter)*100);
         };
 
         this.uploader.onErrorItem = (item, response, status, headers) => {
@@ -64,6 +69,10 @@ export class PhotoEditorComponent implements OnInit {
 
             this.alertify.error(errorMessage);
         };
+
+        this.uploader.onCompleteAll = () => {
+            this.uploaderProgressBarPercentage, this.filesCounter = 0;
+        }
     }
 
     mainPhotoChanged(url: string){
@@ -72,6 +81,7 @@ export class PhotoEditorComponent implements OnInit {
 
     ngOnInit(): void {
         this.initializeFileUploader();
+        this.uploaderProgressBarPercentage, this.filesCounter = 0;
     }
 
     setPrimaryPhoto(propertyId: number, photo: Photo) {

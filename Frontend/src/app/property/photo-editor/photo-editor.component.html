@@ -28,7 +28,8 @@
 <div *ngIf="uploader.queue.length>0">
     Queue Pending: {{ uploader?.queue?.length }}
     <div class="progress">
-        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploaderProgressBarPercentage + '%' }">
+            {{uploaderProgressBarPercentage}}{{uploaderProgressBarPercentage ? ' %':''}}</div>
     </div>
 </div>
 
